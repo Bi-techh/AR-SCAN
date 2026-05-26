@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>FrameCast iPhone Scanner</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body class="scanner-page">
+    <div id="mindStatus" class="scanner-status">Loading frame scanner...</div>
+
+    <a-scene
+      id="scene"
+      embedded
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: true">
+      <a-assets>
+        <video id="frameVideo" muted loop playsinline webkit-playsinline crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <a-entity id="target" mindar-image-target="targetIndex: 0">
+        <a-video src="#frameVideo" width="1" height="0.56" position="0 0 0.02" rotation="0 0 0"></a-video>
+      </a-entity>
+    </a-scene>
+
+    <script type="module" src="./src/mindar-scan.js"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="840" viewBox="0 0 1200 840">
+  <rect width="1200" height="840" fill="#f2efe6"/>
+  <rect x="90" y="80" width="1020" height="680" rx="26" fill="#121418"/>
+  <rect x="138" y="128" width="924" height="584" rx="12" fill="#f2efe6"/>
+  <rect x="184" y="174" width="832" height="492" rx="8" fill="#20252b"/>
+  <path d="M230 596 430 350l128 148 92-108 318 206z" fill="#38d39f"/>
+  <circle cx="816" cy="292" r="78" fill="#e5b84b"/>
+  <path d="M268 244h140v40H268zM268 304h230v28H268zM268 352h166v28H268z" fill="#f2efe6"/>
+  <g fill="none" stroke="#f2efe6" stroke-width="18" stroke-linecap="square">
+    <path d="M220 222h96M220 222v96"/>
+    <path d="M980 222h-96M980 222v96"/>
+    <path d="M220 618h96M220 618v-96"/>
+    <path d="M980 618h-96M980 618v-96"/>
+  </g>
+  <text x="600" y="792" fill="#121418" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800" text-anchor="middle">FRAMECAST AR TARGET</text>
+</svg>

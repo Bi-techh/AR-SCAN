@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>FrameCast AR</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel" aria-label="AR controls">
+        <div>
+          <p class="eyebrow">Image tracked augmented reality</p>
+          <h1>FrameCast AR</h1>
+          <p class="lede">Set up a frame once for your customer. After that, the client only opens the scanner and points their phone camera at the picture frame.</p>
+        </div>
+
+        <div class="mode-tabs" role="tablist" aria-label="App mode">
+          <button id="clientMode" class="mode-tab active" type="button">Client scan</button>
+          <button id="ownerMode" class="mode-tab" type="button">Owner setup</button>
+        </div>
+
+        <div id="clientPanel" class="mode-panel">
+          <button id="startButton" class="primary-action" type="button">Scan frame</button>
+          <p class="panel-note">This is the customer experience: open the link, scan the physical frame, and the video appears inside it.</p>
+        </div>
+
+        <div id="ownerPanel" class="mode-panel setup-panel" hidden>
+          <label class="text-field">
+            <span>Customer/frame name</span>
+            <input id="frameNameInput" type="text" placeholder="e.g. Amina wedding frame">
+          </label>
+          <label class="file-button">
+            <span>Frame image</span>
+            <input id="imagePicker" type="file" accept="image/*">
+          </label>
+          <label class="file-button">
+            <span>Video for frame</span>
+            <input id="videoPicker" type="file" accept="video/*">
+          </label>
+          <label class="file-button">
+            <span>iPhone target .mind</span>
+            <input id="mindPicker" type="file" accept=".mind,application/octet-stream">
+          </label>
+          <button id="saveFrameButton" class="primary-action" type="button">Save frame experience</button>
+          <a class="ghost-button" href="./assets/framecast-target.svg" download>Download demo target</a>
+          <p class="panel-note">For iPhone support, compile the frame image into a MindAR `.mind` file and upload it here with the image and video.</p>
+        </div>
+
+        <div class="status-row">
+          <span id="supportDot" class="dot"></span>
+          <span id="statusText">Checking AR support...</span>
+        </div>
+      </section>
+
+      <section class="preview-band" aria-label="Tracking target preview">
+        <div class="target-wrap">
+          <img id="targetPreview" src="./assets/framecast-target.svg" alt="FrameCast AR tracking target">
+        </div>
+        <div class="notes">
+          <h2 id="targetTitle">Demo frame image</h2>
+          <p id="targetHelp">Owner setup controls which image triggers the AR video. The client only scans the final physical frame.</p>
+          <p class="small">Best results: use a detailed, high-contrast, flat image in bright light. Plain photos with repeated patterns track poorly.</p>
+        </div>
+      </section>
+
+      <section class="codes-band" aria-label="Generated scan codes">
+        <div class="codes-header">
+          <div>
+            <p class="eyebrow">Owner dashboard</p>
+            <h2>Generated scan codes</h2>
+          </div>
+          <button id="refreshCodesButton" type="button">Refresh</button>
+        </div>
+        <div id="codesList" class="codes-list"></div>
+      </section>
+    </main>
+
+    <div id="overlay" class="overlay" hidden>
+      <div class="scan-reticle" aria-hidden="true"></div>
+      <p id="overlayText">Find the FrameCast target</p>
+    </div>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
