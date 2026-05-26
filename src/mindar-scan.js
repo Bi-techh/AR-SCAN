@@ -16,6 +16,9 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const waitForScene = async () => {
   setStatus("Loading camera scanner...");
   for (let i = 0; i < 80; i += 1) {
+    if (!window.AFRAME && i > 20) {
+      throw new Error("A-Frame did not load. Bundle the scanner libraries locally or check network access.");
+    }
     if (scene.hasLoaded && scene.systems?.["mindar-image-system"]) return;
     await wait(250);
   }
@@ -51,8 +54,14 @@ if (window.location.protocol === "file:") {
       startButton.addEventListener("click", async () => {
         startButton.hidden = true;
         setStatus("Starting camera...");
-        await scene.systems["mindar-image-system"].start();
-        setStatus(`Point your camera at ${data.name}`);
+        try {
+          await scene.systems["mindar-image-system"].start();
+          setStatus(`Point your camera at ${data.name}`);
+        } catch (startError) {
+          console.error(startError);
+          setStatus(startError.message || "Camera could not start. Refresh and allow camera permission.");
+          startButton.hidden = false;
+        }
       });
 
       target.addEventListener("targetFound", async () => {
