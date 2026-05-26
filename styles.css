@@ -437,6 +437,26 @@ canvas {
   text-align: center;
 }
 
+.scanner-start {
+  position: fixed;
+  z-index: 21;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 180px;
+  min-height: 54px;
+  border: 0;
+  border-radius: 8px;
+  color: #07100d;
+  background: var(--accent);
+  font-weight: 900;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.42);
+}
+
+.scanner-start[hidden] {
+  display: none;
+}
+
 .scanner-page a-scene {
   width: 100vw;
   height: 100vh;

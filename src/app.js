@@ -509,6 +509,11 @@ const startAR = async () => {
     setStatus("AR is running", "ready");
   } catch (error) {
     console.error(error);
+    if (activeFrame?.mindUrl) {
+      setStatus("WebXR is not available on this phone. Opening camera scanner...", "pending");
+      window.location.href = `./mindar.html?frame=${encodeURIComponent(activeFrame.id)}`;
+      return;
+    }
     startButton.disabled = false;
     overlay.hidden = true;
     setStatus(error.message || "Could not start AR on this device", "error");

@@ -2,6 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from "./config.js";
 
 const status = document.querySelector("#mindStatus");
+const startButton = document.querySelector("#mindStartButton");
 const scene = document.querySelector("#scene");
 const video = document.querySelector("#frameVideo");
 const target = document.querySelector("#target");
@@ -25,9 +26,23 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
   } else if (!data.mind_url) {
     setStatus("This frame needs an iPhone .mind target file.");
   } else {
-    scene.setAttribute("mindar-image", `imageTargetSrc: ${data.mind_url}; autoStart: true; uiScanning: yes;`);
+    scene.setAttribute("mindar-image", `imageTargetSrc: ${data.mind_url}; autoStart: false; uiScanning: yes;`);
     video.src = data.video_url;
-    setStatus(`Point your camera at ${data.name}`);
+    setStatus(`Ready to scan ${data.name}`);
+    startButton.hidden = false;
+
+    startButton.addEventListener("click", async () => {
+      startButton.hidden = true;
+      setStatus("Starting camera...");
+      try {
+        await scene.systems["mindar-image-system"].start();
+        setStatus(`Point your camera at ${data.name}`);
+      } catch (startError) {
+        console.error(startError);
+        setStatus(startError.message || "Camera could not start. Check browser camera permission.");
+        startButton.hidden = false;
+      }
+    });
 
     target.addEventListener("targetFound", async () => {
       setStatus("Video locked");

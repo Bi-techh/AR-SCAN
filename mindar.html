@@ -10,10 +10,12 @@
   </head>
   <body class="scanner-page">
     <div id="mindStatus" class="scanner-status">Loading frame scanner...</div>
+    <button id="mindStartButton" class="scanner-start" type="button" hidden>Start camera</button>
 
     <a-scene
       id="scene"
       embedded
+      mindar-image="autoStart: false; uiScanning: yes;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
