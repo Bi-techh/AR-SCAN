@@ -4,6 +4,7 @@ import { SUPABASE_ANON_KEY, SUPABASE_BUCKET, SUPABASE_URL } from "./config.js";
 import FrameCastQr from "./vendor/qrcode.js";
 
 const startButton = document.querySelector("#startButton");
+const fallbackScannerLink = document.querySelector("#fallbackScannerLink");
 const saveFrameButton = document.querySelector("#saveFrameButton");
 const refreshCodesButton = document.querySelector("#refreshCodesButton");
 const clientMode = document.querySelector("#clientMode");
@@ -189,6 +190,12 @@ const applyFrame = (frame) => {
   targetPreview.src = frame.imageUrl || URL.createObjectURL(frame.image);
   targetTitle.textContent = frame.name;
   targetHelp.textContent = `Scan link loaded: ${frame.id}. Video: ${frame.videoName}.${frame.mindUrl ? " iPhone target ready." : ""}`;
+  if (frame.mindUrl) {
+    fallbackScannerLink.href = `./mindar.html?frame=${encodeURIComponent(frame.id)}`;
+    fallbackScannerLink.hidden = false;
+  } else {
+    fallbackScannerLink.hidden = true;
+  }
   setStatus(`Loaded ${frame.name}. Client scan is ready.`, "ready");
 };
 
